@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"io/ioutil"
 	"strconv"
+	"../middlewares"
 )
 
 // CodeHandler ...recieves code sent by the client.
@@ -15,6 +16,9 @@ func CodeHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Error reading request body.", http.StatusInternalServerError)
 		}
 		fmt.Fprint(w, strconv.Quote(string(body)))
+		// creates a file from the response
+		middlewares.FileCreator(string(body))
+
 	} else {
 		http.Error(w, "Request type not allowed", http.StatusMethodNotAllowed)
 	}
