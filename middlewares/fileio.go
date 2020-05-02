@@ -7,7 +7,7 @@ import (
 
 // FileCreator ...
 func FileCreator(body string) {
-	file, err := os.Create("/Users/reginaldthomas/Development/PersonalProjects/goexe/tests/Test.py")
+	file, err := os.Create("/Users/reginaldthomas/Development/PersonalProjects/goexe/codeexecution/tests/Test.py")
 	if err != nil {
 		panic(err)
 	}

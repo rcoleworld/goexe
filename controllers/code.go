@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"strconv"
 	"../middlewares"
+	"../codeexecution"
 )
 
 // CodeHandler ...recieves code sent by the client.
@@ -15,10 +16,11 @@ func CodeHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			http.Error(w, "Error reading request body.", http.StatusInternalServerError)
 		}
-		fmt.Fprint(w, strconv.Quote(string(body)))
+		fmt.Println(strconv.Quote(string(body)))
 		// creates a file from the response
 		middlewares.FileCreator(string(body))
-
+		codeexecution.DockerPull("python")
+		fmt.Fprint(w, codeexecution.DockerRun())
 	} else {
 		http.Error(w, "Request type not allowed", http.StatusMethodNotAllowed)
 	}

@@ -4,11 +4,9 @@ import (
 	"fmt"
 	"net/http"
 	"./controllers"
-	// "./codeexecution"
 )
 
 func main() {
-	// codeexecution.DockerSpawn()
 	http.HandleFunc("/", controllers.InfoHandler)
 	http.HandleFunc("/submit", controllers.CodeHandler)
 
