@@ -3,11 +3,13 @@ package middlewares
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 )
 
 // FileCreator ...
 func FileCreator(body string) {
-	file, err := os.Create("/Users/reginaldthomas/Development/PersonalProjects/goexe/codeexecution/tests/Test.py")
+	absPath, _ := filepath.Abs("../codeexecution/tests/Test.py")
+	file, err := os.Create(absPath)
 	if err != nil {
 		panic(err)
 	}
