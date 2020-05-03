@@ -1,4 +1,3 @@
-def printS(string):
-	return string
-
-print(printS("lalalala"))
+chars = ["a", "b", "c", "d", "f"]
+for c in chars:
+	print(c)

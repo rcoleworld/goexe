@@ -3,13 +3,12 @@ package middlewares
 import (
 	"fmt"
 	"os"
-	"path/filepath"
+	"../keys" // create a keys file to store your file path
 )
 
 // FileCreator ...
 func FileCreator(body string) {
-	absPath, _ := filepath.Abs("../codeexecution/tests/Test.py")
-	file, err := os.Create(absPath)
+	file, err := os.Create(keys.FilePath) // file path stored in keys
 	if err != nil {
 		panic(err)
 	}
