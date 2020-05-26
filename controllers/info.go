@@ -12,7 +12,6 @@ This route to send a request containing a code snippet is /submit. The request m
 </body>
 `
 
-// InfoHandler ...information about the server.
 func InfoHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, info)
 }

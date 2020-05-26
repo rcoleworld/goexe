@@ -15,18 +15,16 @@ func DockerPull(img string) {
 	fmt.Println(string(pullOut))
 }
 
-func DockerRun() string {
-	buildCmd := exec.Command("bash", "-c", "docker build -t testapp ./codeexecution")
-	// buildOut, err := 
-	buildCmd.Output()
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Println(string(buildOut))
-	runCmd := exec.Command("bash", "-c", "docker run testapp")
+func DockerRun(dir string) string {
+	buildCmd := exec.Command("bash", "-c", fmt.Sprintf("docker build -t %s ./codeexecution/%s", dir, dir))
+	fmt.Println(buildCmd)
+	buildOut, _ := buildCmd.Output()
+	fmt.Println(string(buildOut))
+	runCmd := exec.Command("bash", "-c", fmt.Sprintf("docker run %s", dir))
+	fmt.Println(runCmd)
     runOut, err := runCmd.Output()
     if err != nil {
-		panic(err)
+		fmt.Println(err)
     }
 	fmt.Println(string(runOut))
 	return string(runOut)
