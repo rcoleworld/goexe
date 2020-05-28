@@ -9,10 +9,9 @@ import (
 	"../codeexecution"
 )
 
-// Receives and handles the code sent by the client
 func CodeHandler(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Access-Control-Allow-Origin", "*")
-    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	if r.Method == "POST" {
 		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
@@ -22,10 +21,9 @@ func CodeHandler(w http.ResponseWriter, r *http.Request) {
 		// creates a file from the response
 		fileExtension := r.Header.Get("File-Ext")
 		taskID := r.Header.Get("Task-ID")
-		language := r.Header.Get("Language")
+		language := r.Header.Get("Language")	
 		middlewares.FileCreator(string(body), taskID, fileExtension, taskID)
-		middlewares.DockerFileGen(taskID)
-		codeexecution.DockerPull(language)
+		middlewares.DockerFileGen(taskID, language)
 		fmt.Fprint(w, codeexecution.DockerRun(taskID))
 	} else {
 		http.Error(w, "Request type not allowed", http.StatusMethodNotAllowed)
